@@ -1,3 +1,11 @@
+# Project Folder
+.settings/
+target/
+
+# Project File
+.classpath
+.project
+
 # Compiled class file
 *.class
 
