@@ -1,5 +1,5 @@
 # Login
-## 🚀 Simples tela de login para treinar conceitos sobre sqlinjection e sqlmap
+## 🚀 Simples tela de login para treinar conceitos sobre SqlInjection e SqlMap
 
 ### 🛠 Tecnologias
 
@@ -22,7 +22,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Git](https://git-scm.com), [Java 8](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html), [TomCat 9](https://tomcat.apache.org/download-90.cgi), [MySql](https://downloads.mysql.com/archives/installer/), [MySql Workbench](https://dev.mysql.com/downloads/workbench/). 
 Além disto é bom ter um editor para trabalhar com o código como [Eclipse](https://www.eclipse.org/downloads/packages/)
 
-### 🎲 Rodando o projeto (servidor)
+### 🎲 Rodando o projeto (tomcat)
 
 ```bash
 # Clone este repositório
@@ -31,7 +31,7 @@ $ git clone <https://github.com/eziolemes/Login>
 # Este projeto não contém os arquivos de configuração da IDE, portanto, precisa criar um novo projeto maven do tipo webapp e jogar os arquivos novos dentro dele.
 ```
 
-### 🎲 Rodando o projeto (servidor)
+### 🎲 Gerando o arquivo war para deploy (no maven)
 
 ```bash
 # Para gerar o arquivo war (executável)
