@@ -16,6 +16,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ### Features
 
 - [x] Login seguro e não seguro
+- [x] Lista usuários
+- [x] Lista Produtos
 - [ ] Alterar cadastro do usuário
 
 ### Pré-requisitos
