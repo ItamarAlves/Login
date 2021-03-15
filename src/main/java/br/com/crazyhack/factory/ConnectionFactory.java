@@ -7,7 +7,8 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException{
-		String driverName = "org.gjt.mm.mysql.Driver";
+		//String driverName = "org.gjt.mm.mysql.Driver";
+		String driverName = "com.mysql.cj.jdbc.Driver";
 		Class.forName(driverName);
 		String serverName = "localhost";
 		String mydatabase = "crazyhack";

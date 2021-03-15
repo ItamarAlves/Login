@@ -1,8 +1,7 @@
 package br.com.crazyhack;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.crazyhack.dao.UsuarioDao;
+import br.com.crazyhack.BO.ProdutoBO;
+import br.com.crazyhack.BO.UsuarioBO;
+import br.com.crazyhack.model.ProdutoBean;
 import br.com.crazyhack.model.UsuarioBean;
 
 @WebServlet("/index")
@@ -45,9 +46,38 @@ public class LoginServlet extends HttpServlet {
 			
 			criarLoginForm(request, response);
 
-		}else if (acao.equals("validaLogin")){
+		} else if (acao.equals("validaLogin")){
+			
 			validaLogin(request, response);
+			
+		} else if (acao.equals("listarUsuarios")){
+			
+			listaUsuarios(request, response);
+			
+		} else if (acao.equals("listarProdutos")) {
+			
+			listaProdutos(request, response);
+			
 		}
+	}
+	
+	private void listaProdutos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		ProdutoBO bo = new ProdutoBO();
+		
+		List<ProdutoBean> lista = bo.getProdutos();
+		
+		request.setAttribute("produtos", lista);
+		sendRedirect("produtos.jsp", "Produtos");
+	}
+
+	private void listaUsuarios (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String nome = request.getParameter("nome");
+		
+		UsuarioBO bo = new UsuarioBO();
+		List<UsuarioBean> lista = bo.getUsuariosPorNome(nome);
+		
+		request.setAttribute("usuarios", lista);
+		sendRedirect("index.jsp", "Início");
 	}
 	
 	private void validaLogin (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -57,30 +87,22 @@ public class LoginServlet extends HttpServlet {
 		usuario.setLogin( request.getParameter("login") );
 		usuario.setSenha( request.getParameter("senha") );
 		
-		String seguranca = "N";
+		Boolean seguranca = false;
 		
-		if (request.getParameter("checkS") != null) seguranca = "S";
+		if (request.getParameter("checkS") != null) seguranca = true;
 		
-		try {
-
-			if(seguranca.equals("S")){
-
-				// valida o login seguro
-				usuario = UsuarioDao.validaLoginSeguro( usuario );
-			} else {
-				
-				// valida o login inseguro
-				usuario = UsuarioDao.validaLoginInseguro( usuario );
-			}
+		UsuarioBO bo = new UsuarioBO();
+		
+		usuario = bo.validaLogin(usuario, seguranca);
+		
+		if ( usuario != null ) {
 			// iniciando sessão do usuário
 			
 			request.setAttribute("usuario", usuario.getNome());
 			sendRedirect("index.jsp", "Início");
 
-
-		} catch (SQLException e) {
+		} else {
 			request.setAttribute("erro", "<script language=\"JavaScript\">alert(\"Usuário/senha invalido!\");</script>");
-
 			sendRedirect("login.jsp", "Login");
 		}
 
