@@ -12,6 +12,7 @@
 <title>Crazy Hack - ${pageName}</title>
 
 <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 
 

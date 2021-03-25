@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#formulario {
+	float: left;
+	width: 50%;
+}
+
+#conteudo {
+	float: right;
+}
